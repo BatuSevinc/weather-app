@@ -3,7 +3,7 @@ import { FaWind } from "react-icons/fa6";
 import { BsMoisture } from "react-icons/bs";
 const CurrentCity = () => {
   return (
-    <div className='md:fixed grid gap-6 right-4 bg-[#cf1f37] shadow-md shadow-[#352023] bottom-4 p-2 rounded-xl bg-opacity-40 text-white w-[300px]'>
+    <div className='md:fixed grid gap-6 right-4 bg-[#cf1f37] shadow-lg shadow-[#352023] bottom-4 p-2 rounded-xl bg-opacity-40 text-white w-[300px]'>
       <div className='flex text-xs justify-between'>
           <p>Multan</p>
           <p>25.21.2024</p>
