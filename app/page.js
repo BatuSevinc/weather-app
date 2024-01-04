@@ -123,9 +123,12 @@ useEffect(() => {
         </div>
       </div>
       }
+      {
+        activeFilter === "map" &&
       <div className='flex justify-center'>
       <CurrentCity/>
       </div>
+      }
     </div>
   )
 }
