@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.selection {
+  position: absolute;
+  left: var(--left);
+  width: var(--width);
+  height: var(--height);
+  transition: all 0.2s;
+}
