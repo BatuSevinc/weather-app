@@ -2,12 +2,15 @@
 import { useEffect, useRef, useState } from 'react';
 import TurkeyMap from 'turkey-map-react';
 import cities from './data/datas.json'
-import City from './components/City';
+import { City,CurrentCity } from './components';
+import axios from 'axios';
 
 export default function Home() {
 
   const [activeFilter,setActiveFilter] = useState('map');
   const [filteredCities,setFilteredCities] = useState(cities)
+  const [selectedCity,setSelectedCity] = useState()
+  const [datas,setDatas] = useState([])
   const [position,setPosition] = useState({
     left: null,
     top: null,
@@ -19,7 +22,7 @@ export default function Home() {
 
 
   const handleClickCity = (city) => {
-    console.log(city)
+    setSelectedCity(city)
   } 
 useEffect(() => {
   const element = parentRef.current?.querySelector('.active');
@@ -47,11 +50,24 @@ const handleClick = (e, activeFilt) => {
   });
 };
 
+useEffect(() => {
+  if(selectedCity){
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${
+      selectedCity.name || selectedCity
+    }&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
+    axios.get(url).then((response) => {
+      console.log(response.data)
+      setDatas(response.data)
+    });
+  }
+},[selectedCity])
+
+
   return (
-    <div className=" mt-20 mb-4">
+    <div className="relative pt-10 pb-4 h-screen">
       <div className='flex flex-col'>
 
-      <h1 className=" text-5xl font-semibold text-white text-center mb-8">Patrion - İllere Göre Hava Durumu</h1>
+      <h1 className=" text-2xl md:text-3xl lg:text-5xl font-semibold text-white text-center mb-8">Patrion - İllere Göre Hava Durumu</h1>
       <div
         className="sticky top-4 flex justify-center bg-white border-2 p-1 rounded-full text-[#cf1f37] self-center shadow-xl"
         ref={parentRef}
@@ -90,14 +106,16 @@ const handleClick = (e, activeFilt) => {
       </div>
       {
         activeFilter === "map" ?
+        <div className='lg:-mt-10'>
         <TurkeyMap
         hoverable={true}
         customStyle={{idleColor:"#cf1f37",hoverColor:"#b43a42"}}
         showTooltip={true}
         onClick={(city) => handleClickCity(city)}
         />
+        </div>
         :
-        <div className="sm:flex sm:justify-center">
+        <div className="sm:flex sm:justify-center pb-4">
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:justify-between">
           {filteredCities.map((city,index) => (
             <City key={index} name={city.name} no={city.no} onClickCity={handleClickCity}/>
@@ -105,6 +123,9 @@ const handleClick = (e, activeFilt) => {
         </div>
       </div>
       }
+      <div className='flex justify-center'>
+      <CurrentCity/>
+      </div>
     </div>
   )
 }
