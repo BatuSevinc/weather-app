@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import TurkeyMap from 'turkey-map-react';
 import cities from './data/datas.json'
 import { City,CurrentCity, PopUp } from './components';
+import 'react-loading-skeleton/dist/skeleton.css'
 import axios from 'axios';
 
 export default function Home() {
@@ -13,6 +14,8 @@ export default function Home() {
   const [weeklyAllData,setWeeklyAllData] = useState()
   const [selectedCity,setSelectedCity] = useState()
   const [datas,setDatas] = useState([])
+  const [loading,setLoading] = useState(true)
+  const [loadingWeather,setLoadingWeather] = useState(true)
   const [position,setPosition] = useState({
     left: null,
     top: null,
@@ -58,6 +61,7 @@ useEffect(() => {
     }&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
     axios.get(url).then((response) => {
       setDatas(response.data)
+      setLoading(false)
     });
     const weeklyUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${
       selectedCity.name || selectedCity
@@ -65,6 +69,7 @@ useEffect(() => {
     axios.get(weeklyUrl).then((response) => {
       setWeeklyData(response.data?.list?.slice(0,8))
       setWeeklyAllData(response.data)
+      setLoadingWeather(false)
     });
   }
 },[selectedCity])
@@ -80,11 +85,8 @@ const handleResize = () => {
 };
 
 useEffect(() => {
-  // Sayfa yüklendiğinde ve boyut değişikliklerinde handleResize fonksiyonunu çağır
   handleResize();
   window.addEventListener('resize', handleResize);
-
-  // Component unmount olduğunda event listener'ı temizle
   return () => {
     window.removeEventListener('resize', handleResize);
   };
@@ -159,7 +161,7 @@ useEffect(() => {
       }
      {
       selectedCity &&
-       <PopUp datas={datas} weeklyData={weeklyData} setDatas={setDatas} setSelectedCity={setSelectedCity} weeklyAllData={weeklyAllData} setWeeklyAllData={setWeeklyAllData}/>
+       <PopUp datas={datas} weeklyData={weeklyData} setDatas={setDatas} loading={loading} setLoading={setLoading} loadingWeather={loadingWeather} setLoadingWeather={setLoadingWeather} setSelectedCity={setSelectedCity} weeklyAllData={weeklyAllData} setWeeklyAllData={setWeeklyAllData}/>
      }
     </div>
   )
