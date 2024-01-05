@@ -50,10 +50,10 @@ const PopUp = ({datas,setDatas,setSelectedCity,weeklyData,weeklyAllData,setWeekl
         alt='/'
         width={400}
         height={200}
-        className='max-h-[250px] w-[95%] lg:max-w-[400px] shadow-2xl mt-4 h-[220px] sm:h-[250px] bg-cover rounded-xl'
+        className='max-h-[250px] w-[95%] lg:max-w-[400px] shadow-2xl mt-4 h-[250px] bg-cover rounded-xl'
         />
-      <div className="absolute inset-0 bg-black opacity-25 max-h-[250px] w-[95%] lg:max-w-[400px] shadow-2xl mt-4 h-[220px] sm:h-[250px] bg-cover rounded-xl z-20"></div>
-      <div className='absolute flex flex-col justify-between sm:pr-2 text-center h-[220px] sm:h-full max-h-[250px] w-[90%] lg:max-w-[400px] top-4 z-50'>
+      <div className="absolute inset-0 bg-black opacity-25 max-h-[250px] w-[95%] lg:max-w-[400px] shadow-2xl mt-4 h-[250px] bg-cover rounded-xl z-20"></div>
+      <div className='absolute flex flex-col justify-between sm:pr-2 text-center h-[250px] sm:h-full max-h-[250px] w-[90%] lg:max-w-[400px] top-4 z-50'>
       <div className='sm:flex items-center justify-between w-full'>
       {datas && datas.weather && datas.weather[0] && (
         <div className='flex justify-center sm:justify-start items-center'>
@@ -80,7 +80,7 @@ const PopUp = ({datas,setDatas,setSelectedCity,weeklyData,weeklyAllData,setWeekl
       </div>
         <DetailsMobile datas={datas}/>
     </div>
-    <div className='w-[100%] max-w-[400px] mx-auto mt-4 pb-4'>
+    <div className='w-[100%] shadow-2xl rounded-xl max-w-[400px] mx-auto mt-4 pb-4'>
         <LineChart chartData={userData}/>
     </div>
       </div>
@@ -89,7 +89,7 @@ const PopUp = ({datas,setDatas,setSelectedCity,weeklyData,weeklyAllData,setWeekl
       <DetailsLarge datas={datas}/>
       </div>
       
-      <div className='lg:w-[40%] flex flex-wrap lg:flex-col gap-2 justify-center rounded-lg sm:py-2 items-center bg-[#f5f4fc] h-full'>
+      <div className='lg:w-[40%] flex flex-wrap lg:flex-col gap-2 justify-center rounded-lg py-2 items-center bg-[#f5f4fc] h-full'>
         <NextDays weeklyAllData={weeklyAllData}/>
       </div>
       </div>

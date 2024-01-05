@@ -49,13 +49,13 @@ const NextDays = ({weeklyAllData}) => {
       date.getFullYear() === today.getFullYear()
     );
   }
-  console.log(allForecastsAt21Hour)
+
   return (
     <>
     {
       (allForecastsAt12Hour && allForecastsAt12Hour[0]) &&
     <div className='flex border border-slate-400 rounded-md h-[50px] lg:w-[90%]'>
-          <div className='bg-[#cf1f37] flex justify-around items-center font-semibold w-[50%] rounded-md'>
+          <div className='bg-[#cf1f37] flex justify-around items-center min-w-[100px] font-semibold w-[50%] rounded-md'>
             {
               (allForecastsAt12Hour[0].main && allForecastsAt12Hour[0].main.temp) &&
               <div className='flex items-center text-white gap-1'>
@@ -69,7 +69,7 @@ const NextDays = ({weeklyAllData}) => {
             </div>
             }
           </div>
-          <div className='flex items-center justify-around mx-auto gap-1 md:gap-2'>
+          <div className='flex items-center justify-around lg:ml-5 min-w-[100px] gap-1 md:gap-2'>
           {allForecastsAt12Hour[0].weather && allForecastsAt12Hour[0].weather[0] &&
           <Image
             src={`http://openweathermap.org/img/wn/${allForecastsAt12Hour[0].weather[0].icon}@2x.png`}
@@ -80,7 +80,7 @@ const NextDays = ({weeklyAllData}) => {
             priority={true}
           />
           }
-          <div className='text-center'>
+          <div className='text-start'>
             <p className='text-xs font-medium'>{new Date(allForecastsAt12Hour[0].dt_txt).toLocaleDateString('tr-TR', { weekday: 'long' })}</p>
             <p className='text-[10px]'>{translateWeather(allForecastsAt12Hour[0].weather[0].main)}</p>
           </div>
@@ -90,7 +90,7 @@ const NextDays = ({weeklyAllData}) => {
       {
       (allForecastsAt12Hour && allForecastsAt12Hour[1]) &&
     <div className='flex border border-slate-400 rounded-md h-[50px] lg:w-[90%]'>
-          <div className='bg-[#cf1f37] flex justify-around items-center font-semibold w-[50%] rounded-md'>
+          <div className='bg-[#cf1f37] flex justify-around items-center min-w-[100px] font-semibold w-[50%] rounded-md'>
             {
               (allForecastsAt12Hour[1].main && allForecastsAt12Hour[1].main.temp) &&
               <div className='flex items-center text-white gap-1'>
@@ -104,7 +104,7 @@ const NextDays = ({weeklyAllData}) => {
             </div>
             }
           </div>
-          <div className='flex items-center justify-around mx-auto gap-1 md:gap-2'>
+          <div className='flex items-center justify-around lg:ml-5 min-w-[100px] gap-1 md:gap-2'>
           {allForecastsAt12Hour[1].weather && allForecastsAt12Hour[1].weather[0] &&
           <Image
             src={`http://openweathermap.org/img/wn/${allForecastsAt12Hour[1].weather[0].icon}@2x.png`}
@@ -115,7 +115,7 @@ const NextDays = ({weeklyAllData}) => {
             priority={true}
           />
           }
-          <div className='text-center'>
+          <div className='text-start'>
             <p className='text-xs font-medium'>{new Date(allForecastsAt12Hour[1].dt_txt).toLocaleDateString('tr-TR', { weekday: 'long' })}</p>
             <p className='text-[10px]'>{translateWeather(allForecastsAt12Hour[1].weather[0].main)}</p>
           </div>
@@ -125,7 +125,7 @@ const NextDays = ({weeklyAllData}) => {
             {
       (allForecastsAt12Hour && allForecastsAt12Hour[2]) &&
     <div className='flex border border-slate-400 rounded-md h-[50px] lg:w-[90%]'>
-          <div className='bg-[#cf1f37] flex justify-around items-center font-semibold w-[50%] rounded-md'>
+          <div className='bg-[#cf1f37] flex justify-around items-center min-w-[100px] font-semibold w-[50%] rounded-md'>
             {
               (allForecastsAt12Hour[2].main && allForecastsAt12Hour[2].main.temp) &&
               <div className='flex items-center text-white gap-1'>
@@ -139,7 +139,7 @@ const NextDays = ({weeklyAllData}) => {
             </div>
             }
           </div>
-          <div className='flex items-center justify-around mx-auto gap-1 md:gap-2'>
+          <div className='flex items-center justify-around lg:ml-5 min-w-[100px] gap-1 md:gap-2'>
           {allForecastsAt12Hour[2].weather && allForecastsAt12Hour[2].weather[0] &&
           <Image
             src={`http://openweathermap.org/img/wn/${allForecastsAt12Hour[2].weather[0].icon}@2x.png`}
@@ -150,7 +150,7 @@ const NextDays = ({weeklyAllData}) => {
             priority={true}
           />
           }
-          <div className='text-center'>
+          <div className='text-start'>
             <p className='text-xs font-medium'>{new Date(allForecastsAt12Hour[2].dt_txt).toLocaleDateString('tr-TR', { weekday: 'long' })}</p>
             <p className='text-[10px]'>{translateWeather(allForecastsAt12Hour[2].weather[0].main)}</p>
           </div>
