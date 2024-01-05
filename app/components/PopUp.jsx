@@ -1,19 +1,17 @@
 import Image from 'next/image';
 import React from 'react'
-import { IoClose,IoArrowUpOutline,IoArrowDownOutline } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
 import { Sunny } from '@/public';
 import AnimatedText from '../helpers/animatedText';
-import { DetailsLarge,DetailsMobile, LineChart } from '.';
+import { DetailsLarge,DetailsMobile, LineChart, NextDays } from '.';
 import { getTurkishDateTime } from '../helpers/getTurkishDateTime';
 import {translateWeather} from '../helpers/translateWeather';
 
-const PopUp = ({datas,setDatas,setSelectedCity,weeklyData}) => {
-  console.log("datas",datas)
+const PopUp = ({datas,setDatas,setSelectedCity,weeklyData,weeklyAllData,setWeeklyAllData}) => {
   const hours = weeklyData?.map(entry => {
     const dt = new Date(entry.dt_txt);
     return dt.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
   });
-  console.log(hours)
 
   const userData = {
     labels: hours || [], 
@@ -30,10 +28,12 @@ const PopUp = ({datas,setDatas,setSelectedCity,weeklyData}) => {
       },
     ],
   };
+  console.log(weeklyAllData)
+  
   return (
-    <div className='fixed inset-0 z-50 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center cursor-pointer' onClick={() => (setSelectedCity(""),setDatas())}>
+    <div className='fixed inset-0 z-50 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center cursor-pointer' onClick={() => (setSelectedCity(""),setDatas(),setWeeklyAllData())}>
     <div className='bg-[#cf1f37] relative rounded-3xl w-[80%] lg:w-[95%] max-w-[1000px] min-h-[700px] h-[600px] cursor-default' onClick={(e) => e.stopPropagation()}>
-      <div className='absolute right-4 top-4 cursor-pointer' onClick={() =>(setSelectedCity(""),setDatas())}><IoClose size={24}/></div>
+      <div className='absolute right-4 top-4 cursor-pointer' onClick={() =>(setSelectedCity(""),setDatas(),setWeeklyAllData())}><IoClose size={24}/></div>
       <div className='absolute font-bold text-3xl md:text-4xl text-center left-[3%] sm:left-[5%] md:left-[6%] leading-normal text-white top-[15%]'>
           <AnimatedText text="PATRION" />
       </div>
@@ -90,85 +90,7 @@ const PopUp = ({datas,setDatas,setSelectedCity,weeklyData}) => {
       </div>
       
       <div className='lg:w-[40%] flex flex-wrap lg:flex-col gap-2 justify-center rounded-lg sm:py-2 items-center bg-[#f5f4fc] h-full'>
-        <div className='flex border border-slate-400 rounded-md h-[50px] lg:w-[90%]'>
-          <div className='bg-[#cf1f37] flex justify-around items-center font-semibold w-[50%] rounded-md'>
-            <div className='flex items-center text-white gap-1'>
-           <IoArrowUpOutline/> 16 &#176;
-            </div>
-            <div className='flex items-center text-white gap-1'>
-             <div><IoArrowDownOutline /></div> 24 &#176;
-            </div>
-          </div>
-          <div className='flex items-center justify-around mx-auto gap-1 md:gap-2'>
-          {datas && datas.weather && datas.weather[0] &&
-          <Image
-            src={`http://openweathermap.org/img/wn/${datas.weather[0].icon}@2x.png`}
-            alt='weather-icon'
-            width='30'
-            height='30'
-            className='z-10 bg-black/60 rounded-full'
-            priority={true}
-          />
-          }
-          <div className='text-center'>
-            <p className='text-xs font-medium'>Wednesday</p>
-            <p className='text-[10px]'>Cloudy</p>
-          </div>
-          </div>
-        </div>
-        <div className='flex border border-slate-400 rounded-md h-[50px] lg:w-[90%]'>
-          <div className='bg-[#cf1f37] flex justify-around items-center font-semibold w-[50%] rounded-md'>
-            <div className='flex items-center text-white gap-1'>
-           <IoArrowUpOutline/> 16 &#176;
-            </div>
-            <div className='flex items-center text-white gap-1'>
-             <div><IoArrowDownOutline /></div> 24 &#176;
-            </div>
-          </div>
-          <div className='flex items-center justify-around mx-auto gap-1 md:gap-2'>
-          {datas && datas.weather && datas.weather[0] &&
-          <Image
-            src={`http://openweathermap.org/img/wn/${datas.weather[0].icon}@2x.png`}
-            alt='weather-icon'
-            width='30'
-            height='30'
-            className='z-10 bg-black/60 rounded-full'
-            priority={true}
-          />
-          }
-          <div className='text-center'>
-            <p className='text-xs font-medium'>Wednesday</p>
-            <p className='text-[10px]'>Cloudy</p>
-          </div>
-          </div>
-        </div>
-        <div className='flex border border-slate-400 rounded-md h-[50px] lg:w-[90%]'>
-          <div className='bg-[#cf1f37] flex justify-around items-center font-semibold w-[50%] rounded-md'>
-            <div className='flex items-center text-white gap-1'>
-           <IoArrowUpOutline/> 16 &#176;
-            </div>
-            <div className='flex items-center text-white gap-1'>
-             <div><IoArrowDownOutline /></div> 24 &#176;
-            </div>
-          </div>
-          <div className='flex items-center justify-around mx-auto gap-1 md:gap-2'>
-          {datas && datas.weather && datas.weather[0] &&
-          <Image
-            src={`http://openweathermap.org/img/wn/${datas.weather[0].icon}@2x.png`}
-            alt='weather-icon'
-            width='30'
-            height='30'
-            className='z-10 bg-black/60 rounded-full'
-            priority={true}
-          />
-          }
-          <div className='text-center'>
-            <p className='text-xs font-medium'>Wednesday</p>
-            <p className='text-[10px]'>Cloudy</p>
-          </div>
-          </div>
-        </div>
-
+        <NextDays weeklyAllData={weeklyAllData}/>
       </div>
       </div>
       </div>

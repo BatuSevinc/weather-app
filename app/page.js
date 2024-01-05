@@ -10,6 +10,7 @@ export default function Home() {
   const [activeFilter,setActiveFilter] = useState('map');
   const [filteredCities,setFilteredCities] = useState(cities)
   const [weeklyData,setWeeklyData] = useState()
+  const [weeklyAllData,setWeeklyAllData] = useState()
   const [selectedCity,setSelectedCity] = useState()
   const [datas,setDatas] = useState([])
   const [position,setPosition] = useState({
@@ -63,10 +64,10 @@ useEffect(() => {
     }&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
     axios.get(weeklyUrl).then((response) => {
       setWeeklyData(response.data?.list?.slice(0,8))
+      setWeeklyAllData(response.data)
     });
   }
 },[selectedCity])
-
 
   return (
     <div className="relative pt-10 pb-4 h-screen">
@@ -136,7 +137,7 @@ useEffect(() => {
       }
      {
       selectedCity &&
-       <PopUp datas={datas} weeklyData={weeklyData} setDatas={setDatas} setSelectedCity={setSelectedCity}/>
+       <PopUp datas={datas} weeklyData={weeklyData} setDatas={setDatas} setSelectedCity={setSelectedCity} weeklyAllData={weeklyAllData} setWeeklyAllData={setWeeklyAllData}/>
      }
     </div>
   )

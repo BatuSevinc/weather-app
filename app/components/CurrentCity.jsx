@@ -12,7 +12,6 @@ const CurrentCity = () => {
     if(currentCity){
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
       axios.get(url).then((response) => {
-        console.log(response.data)
         setCurrentData(response.data)
       });
     }
