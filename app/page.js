@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import TurkeyMap from 'turkey-map-react';
 import cities from './data/datas.json'
-import { City,CurrentCity } from './components';
+import { City,CurrentCity, PopUp } from './components';
 import axios from 'axios';
 
 export default function Home() {
@@ -129,6 +129,10 @@ useEffect(() => {
       <CurrentCity/>
       </div>
       }
+     {
+      selectedCity &&
+       <PopUp datas={datas} setDatas={setDatas} setSelectedCity={setSelectedCity}/>
+     }
     </div>
   )
 }
