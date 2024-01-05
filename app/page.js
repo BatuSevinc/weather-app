@@ -69,6 +69,27 @@ useEffect(() => {
   }
 },[selectedCity])
 
+const [showTooltip, setShowTooltip] = useState(true);
+
+const handleResize = () => {
+  if (window.innerWidth <= 1024) {
+    setShowTooltip(false);
+  } else {
+    setShowTooltip(true);
+  }
+};
+
+useEffect(() => {
+  // Sayfa yüklendiğinde ve boyut değişikliklerinde handleResize fonksiyonunu çağır
+  handleResize();
+  window.addEventListener('resize', handleResize);
+
+  // Component unmount olduğunda event listener'ı temizle
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);
+
   return (
     <div className="relative pt-10 pb-4 h-screen">
       <div className='flex flex-col'>
@@ -116,8 +137,9 @@ useEffect(() => {
         <TurkeyMap
         hoverable={true}
         customStyle={{idleColor:"#cf1f37",hoverColor:"#b43a42"}}
-        showTooltip={true}
+        showTooltip={showTooltip}
         onClick={(city) => handleClickCity(city)}
+        viewBox={{ top: 0, left: 80, width: 1050, height: 585} }
         />
         </div>
         :
