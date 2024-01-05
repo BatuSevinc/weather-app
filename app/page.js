@@ -9,6 +9,7 @@ export default function Home() {
 
   const [activeFilter,setActiveFilter] = useState('map');
   const [filteredCities,setFilteredCities] = useState(cities)
+  const [weeklyData,setWeeklyData] = useState()
   const [selectedCity,setSelectedCity] = useState()
   const [datas,setDatas] = useState([])
   const [position,setPosition] = useState({
@@ -49,15 +50,19 @@ const handleClick = (e, activeFilt) => {
     height,
   });
 };
-
 useEffect(() => {
   if(selectedCity){
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${
       selectedCity.name || selectedCity
     }&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
     axios.get(url).then((response) => {
-      console.log(response.data)
       setDatas(response.data)
+    });
+    const weeklyUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${
+      selectedCity.name || selectedCity
+    }&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
+    axios.get(weeklyUrl).then((response) => {
+      setWeeklyData(response.data?.list?.slice(0,8))
     });
   }
 },[selectedCity])
@@ -131,7 +136,7 @@ useEffect(() => {
       }
      {
       selectedCity &&
-       <PopUp datas={datas} setDatas={setDatas} setSelectedCity={setSelectedCity}/>
+       <PopUp datas={datas} weeklyData={weeklyData} setDatas={setDatas} setSelectedCity={setSelectedCity}/>
      }
     </div>
   )
