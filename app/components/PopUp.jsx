@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { useEffect } from 'react'
 import { IoClose } from "react-icons/io5";
-import { Sunny } from '@/public';
+import { bgImg } from '@/public';
 import AnimatedText from '../helpers/animatedText';
 import Skeleton from 'react-loading-skeleton'
 import { DetailsLarge,DetailsMobile, LineChart, NextDays } from '.';
@@ -47,7 +47,7 @@ const PopUp = ({datas,setDatas,setSelectedCity,weeklyData,weeklyAllData,setWeekl
     <div className='fixed inset-0 z-50 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center cursor-pointer' onClick={() => (setSelectedCity(""),setDatas(),setWeeklyAllData())}>
     <div className='bg-[#cf1f37] relative rounded-3xl w-[80%] lg:w-[95%] max-w-[1000px] min-h-[700px] h-[600px] cursor-default' onClick={(e) => e.stopPropagation()}>
       <div className='absolute right-4 top-4 cursor-pointer' onClick={() =>(setSelectedCity(""),setDatas(),setWeeklyAllData())}><IoClose size={24}/></div>
-      <div className='absolute font-bold text-3xl md:text-4xl text-center left-[3%] sm:left-[5%] md:left-[6%] leading-normal text-white top-[15%]'>
+      <div className='absolute font-bold text-3xl md:text-4xl text-center left-[3%] sm:left-[5%] md:left-[6%] leading-normal text-white top-[20%] md:top-[23%]'>
           <AnimatedText text="PATRION" />
       </div>
       <div className="h-full flex flex-col rounded-3xl pl-[17%] pt-[5%] overflow-auto" style={{ background: 'linear-gradient(to right, #cf1f37 15%, #f6f6f6 15%)' }}>
@@ -82,7 +82,7 @@ const PopUp = ({datas,setDatas,setSelectedCity,weeklyData,weeklyAllData,setWeekl
   ) :
           <div className='relative flex flex-wrap'>
         <Image
-        src={Sunny}
+        src={bgImg}
         alt='/'
         width={400}
         height={200}
@@ -116,7 +116,7 @@ const PopUp = ({datas,setDatas,setSelectedCity,weeklyData,weeklyAllData,setWeekl
       </div>
         <DetailsMobile datas={datas}/>
     </div>
-    <div className={`w-[100%] shadow-2xl rounded-xl max-w-[400px] mx-auto ${!loading ? "" : "mt-4 pb-4"}`}>
+    <div className={`w-[100%] shadow-2xl rounded-xl mt-10 max-w-[400px] mx-auto ${!loading ? "" : "mt-4 pb-4"}`}>
         <LineChart chartData={userData}/>
     </div>
       </div>
@@ -136,7 +136,7 @@ const PopUp = ({datas,setDatas,setSelectedCity,weeklyData,weeklyAllData,setWeekl
       </div>
       }
       
-      <div className='lg:w-[40%] flex flex-wrap lg:flex-col gap-2 justify-center rounded-lg py-2 items-center bg-[#f5f4fc] h-full'>
+      <div className='lg:w-[40%] flex flex-wrap mt-10 md:mt-5 lg:mt-0 lg:flex-col gap-2 justify-center rounded-lg py-2 items-center bg-[#f5f4fc] h-full'>
         {
           loadingWeather ? 
           <>

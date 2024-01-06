@@ -1,5 +1,5 @@
-import Sunny from './sunny.jpg'
+import bgImg from './bgImg.jpg'
 
 export {
-  Sunny
+  bgImg
 }
